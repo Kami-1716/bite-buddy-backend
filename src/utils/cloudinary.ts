@@ -10,15 +10,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadToCloudinary = async (file: string, folder?: string) => {
+const uploadToCloudinary = async (file: string) => {
   try {
-    const result = await cloudinary.uploader.upload(file, {
-      folder,
-    });
-    fs.unlinkSync(file);
+    const result = await cloudinary.uploader.upload(file);
     return result;
   } catch (error) {
-    fs.unlinkSync(file);
     throw new Error("Cloudinary upload failed");
   }
 };
