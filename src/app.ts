@@ -14,8 +14,12 @@ app.get("/api/v1/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "ok" });
 });
 
-// routes
+// user routes
 import userRoutes from "./routes/user.routes";
 app.use("/api/v1/user", userRoutes);
+
+// restaurant routes
+import restaurantRoutes from "./routes/restaurant.routes";
+app.use("/api/v1/restaurant", restaurantRoutes);
 
 export default app;
