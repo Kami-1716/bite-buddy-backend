@@ -44,9 +44,7 @@ export const getMyRestaurant = async (req: Request, res: Response) => {
         message: "Restaurant not found",
       });
     }
-    res.status(200).json({
-      restaurant,
-    });
+    res.status(200).json(restaurant);
   } catch (error) {
     console.log(error);
     res.status(500).json({
