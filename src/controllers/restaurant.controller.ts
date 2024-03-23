@@ -19,7 +19,7 @@ export const createNewRestaurant = async (req: Request, res: Response) => {
 
     const uploadImageResponse = await uploadToCloudinary(dataUri);
     const restaurant = new Restaurant(req.body);
-    restaurant.imageLink = uploadImageResponse.url;
+    restaurant.imageUrl = uploadImageResponse.url;
     restaurant.user = new mongoose.Types.ObjectId(req.userId);
     restaurant.lastUpdated = new Date();
     await restaurant.save();
