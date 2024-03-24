@@ -26,4 +26,8 @@ app.use("/api/v1/user", userRoutes);
 import restaurantRoutes from "./routes/restaurant.routes";
 app.use("/api/v1/restaurant", restaurantRoutes);
 
+// search restaurants routes
+import searchRestaurantsRoutes from "./routes/search-restaurants.routes";
+app.use("/api/v1/restaurants", searchRestaurantsRoutes);
+
 export default app;
