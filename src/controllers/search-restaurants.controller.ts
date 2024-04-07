@@ -4,7 +4,7 @@ import { Restaurant } from "../models/restaurant.model";
 export const searchRestaurants = async (req: Request, res: Response) => {
   try {
     const city = req.params.city;
-    const searchQuery = (req.query.searchQuery as string) || "";
+    const searchTerm = (req.query.searchTerm as string) || "";
     const selectedCuisines = (req.query.selectedCuisines as string) || "";
     const sortOptions = (req.query.sortOptions as string) || "lastUpdated";
     const page = parseInt(req.query.page as string) || 1;
@@ -25,14 +25,15 @@ export const searchRestaurants = async (req: Request, res: Response) => {
     }
 
     if (selectedCuisines) {
+      console.log(selectedCuisines);
       const cuisinesArray = selectedCuisines
         .split(",")
         .map((cuisine) => new RegExp(cuisine, "i"));
-      query["cuisines"] = { $all: cuisinesArray };
+      query["cuisines"] = { $in: cuisinesArray };
     }
 
-    if (searchQuery) {
-      const searchRegex = new RegExp(searchQuery, "i");
+    if (searchTerm) {
+      const searchRegex = new RegExp(searchTerm, "i");
       query["$or"] = [
         { restaurantName: searchRegex },
         { cuisines: { $in: [searchRegex] } },
