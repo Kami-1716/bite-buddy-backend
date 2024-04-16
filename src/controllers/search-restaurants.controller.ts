@@ -12,6 +12,7 @@ export const searchRestaurants = async (req: Request, res: Response) => {
     let query: any = {};
 
     query["city"] = new RegExp(city, "i");
+
     const cityCheck = await Restaurant.countDocuments(query);
     if (cityCheck === 0) {
       return res.status(404).json({
