@@ -26,7 +26,6 @@ export const searchRestaurants = async (req: Request, res: Response) => {
     }
 
     if (selectedCuisines) {
-      console.log(selectedCuisines);
       const cuisinesArray = selectedCuisines
         .split(",")
         .map((cuisine) => new RegExp(cuisine, "i"));
@@ -43,7 +42,7 @@ export const searchRestaurants = async (req: Request, res: Response) => {
 
     const pageSize = 10;
     const restaurants = await Restaurant.find(query)
-      .sort({ [sortOptions]: -1 })
+      .sort({ [sortOptions]: 1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize)
       .lean();
